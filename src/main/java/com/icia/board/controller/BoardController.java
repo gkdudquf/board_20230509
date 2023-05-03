@@ -5,11 +5,9 @@ import com.icia.board.service.BoardService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,4 +40,32 @@ public class BoardController {
         model.addAttribute("boardList",boardDTOList);
         return "boardPages/boardList";
     }
+
+    @GetMapping("")
+    public String detailForm(@RequestParam("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        boardService.updateHits(id);
+        model.addAttribute("boardDTO", boardDTO);
+        return "boardPages/boardDetail";
+    }
+
+    @GetMapping("/update")
+    public String updateForm(@RequestParam("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("boardDTO", boardDTO);
+        return "boardPages/boardUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO) {
+        boardService.update(boardDTO);
+        return "boardPages/boardDetail";
+    }
+
+    @GetMapping("/deleteCheck")
+    public String delete(@RequestParam("id") Long id) {
+
+        return "boardPages/deleteCheck";
+    }
 }
+

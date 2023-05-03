@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Service;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -17,6 +17,6 @@ public class BoardDTO {
     private String boardTitle;
     private String boardContents;
     private Timestamp boardCreatedDate;
-    private int boardHit;
+    private int boardHits;
     private int fileAttached;
 }

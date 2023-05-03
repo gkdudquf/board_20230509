@@ -21,27 +21,51 @@
 <%@include file="../component/nav.jsp"%>
 
 <div id="section">
+
+
     <table>
         <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성시간</th>
-            <th>조회수</th>
+            <th>번호</th>
+            <td>${boardDTO.id}</td>
         </tr>
-        <c:forEach items="${boardList}" var="board">
-            <tr>
-                <td>${board.id}</td>
-                <td><a href="/board?id=${board.id}">${board.boardTitle}</a></td>
-                <td>${board.boardWriter}</td>
-                <td>${board.boardCreatedDate}</td>
-                <td>${board.boardHits}</td>
-            </tr>
-        </c:forEach>
+        <tr>
+            <th>작성자</th>
+            <td>${boardDTO.boardWriter}</td>
+        </tr>
+        <tr>
+            <th>글제목</th>
+            <td>${boardDTO.boardTitle}</td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td>${boardDTO.boardContents}</td>
+        </tr>
+        <tr>
+            <th>작성일</th>
+            <td>${boardDTO.boardCreatedDate}</td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td>${boardDTO.boardHits}</td>
+        </tr>
+        <tr>
+            <th>파일첨부유무</th>
+            <td>${boardDTO.fileAttached}</td>
+        </tr>
     </table>
+    <button onclick="board_detail('${boardDTO.id}')">수정</button>
+    <button onclick="board_delete('${boardDTO.id}')">삭제</button>
 </div>
 <%@include file="../component/footer.jsp"%>
 </body>
+<script>
+    const board_detail = (id) => {
+        location.href = "/board/update?id=" + id;
+    }
 
+    const board_delete = (id) => {
+        location.href = "/board/deleteCheck?id=" + id;
+    }
+</script>
 
 </html>
