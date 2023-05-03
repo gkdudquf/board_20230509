@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    margin : auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: black;
+}
+
+li  {
+    float: left;
+}
+
+li a {
+    display: inline-block;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+li a:hover {
+    background-color: purple;
+}
+
+#section table {
+    border: 1px solid black;
+}
+
+#section table tr, th, td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+
