@@ -17,8 +17,8 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="component/header.jsp"%>
-<%@include file="component/nav.jsp"%>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 
 <div id="section">
 
@@ -50,5 +50,5 @@
 </div>
 </body>
 
-<%@include file="component/footer.jsp"%>
+<%@include file="../component/footer.jsp"%>
 </html>

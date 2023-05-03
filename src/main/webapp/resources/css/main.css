@@ -2,12 +2,12 @@
     box-sizing: border-box;
     margin : auto;
     font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
 }
 
 #header {
     background-color: black;
     color: white;
-    text-align: center;
     padding: 20px;
 }
 
@@ -24,13 +24,16 @@ li  {
 li a {
     display: inline-block;
     padding: 15px 15px;
-    text-align: center;
     text-decoration: none;
     color: white;
 }
 
 li a:hover {
     background-color: purple;
+}
+
+#section {
+    height: 400px;
 }
 
 #section table {
@@ -42,4 +45,9 @@ li a:hover {
     border: 1px solid black;
 }
 
+#footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+}
 

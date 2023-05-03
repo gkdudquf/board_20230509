@@ -5,8 +5,8 @@
 
 <mapper namespace="Board">
     <insert id="save" parameterType="com.icia.board.dto.BoardDTO">
-        insert into board_table(id, boardWriter, boardPass, boardTitle, boardContents)
-        values (#{id}, #{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
+        insert into board_table(boardWriter, boardPass, boardTitle, boardContents)
+        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
     </insert>
 
     <select id="findAll" resultType="board">

@@ -12,10 +12,10 @@
             <a href="/"><i class="bi bi-house"></i></a>
         </li>
         <li>
-            <a href="/boardSave">게시글 작성</a>
+            <a href="/board/save">게시글 작성</a>
         </li>
         <li>
-            <a href="/boardList">게시글 목록</a>
+            <a href="/board/">게시글 목록</a>
         </li>
     </ul>
 </div>
