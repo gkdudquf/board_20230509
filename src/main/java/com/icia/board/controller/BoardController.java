@@ -24,7 +24,7 @@ public class BoardController {
         return "boardPages/boardSave";
     }
 
-    @PostMapping("/board/save")
+    @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO) {
         int saveResult = boardService.save(boardDTO);
         if(saveResult > 0) {
@@ -63,9 +63,16 @@ public class BoardController {
     }
 
     @GetMapping("/deleteCheck")
-    public String delete(@RequestParam("id") Long id) {
-
+    public String deleteCheck(@RequestParam("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("boardDTO", boardDTO);
         return "boardPages/deleteCheck";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        boardService.delete(id);
+        return "redirect:/board/";
     }
 }
 
