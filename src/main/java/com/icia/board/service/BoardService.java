@@ -68,6 +68,11 @@ public class BoardService {
         boardRepository.updateHits(id);
     }
 
+    public BoardFileDTO findFile(Long id) {
+        return boardRepository.findFile(id);
+    }
+
+
     public void update(BoardDTO boardDTO) {
         boardRepository.update(boardDTO);
     }
@@ -75,4 +80,6 @@ public class BoardService {
     public void delete(Long id) {
         boardRepository.delete(id);
     }
+
+
 }

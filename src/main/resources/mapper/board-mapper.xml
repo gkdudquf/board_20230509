@@ -32,4 +32,8 @@
     <delete id="delete" parameterType="Long">
         delete from board_table where id=#{id}
     </delete>
+
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from board_file_table where boardId=#{boardId}
+    </select>
 </mapper>

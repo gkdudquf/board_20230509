@@ -55,6 +55,14 @@
             <th>파일첨부유무</th>
             <td>${board.fileAttached}</td>
         </tr>
+        <c:if test="${board.fileAttached ==1}">
+        <tr>
+            <th>이미지</th>
+            <td>
+                <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt="">
+            </td>
+        </tr>
+        </c:if>
     </table>
     <button onclick="board_list()">목록</button>
     <button onclick="board_detail()">수정</button>
