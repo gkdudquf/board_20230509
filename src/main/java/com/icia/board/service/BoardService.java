@@ -19,24 +19,25 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     public void save(BoardDTO boardDTO) throws IOException {
-        //파일 없음 get(0): 0번 인덱스 파일이 있는지 확인. 여러파일 넣을 시 사용
+        // 파일 있음, 없음.
         if (boardDTO.getBoardFile().get(0).isEmpty()) {
+            // 파일 없음.
             System.out.println("파일없음");
             boardDTO.setFileAttached(0);
             boardRepository.save(boardDTO);
         } else {
-            //파일 있음
+            // 파일 있음.
             /*
-             * 1. 파일첨부 여부 값 1로 세팅하고 DB에 제목 등 내용 board_table에 저장처리
-             * 2. 파일의 이름을 가져오고 DTO 필드값에 세팅
-             * 3. 저장용 파일 이름 만들고 DTO 필드값에 세팅
-             * 4. 로컬에 파일 저장
-             * 5. board_file_table에 저장 처리
-             * */
+                1. 파일첨부 여부 값 1로 세팅하고 DB에 제목 등 내용 board_table에 저장 처리
+                2. 파일의 이름을 가져오고 DTO 필드값에 세팅
+                3. 저장용 파일 이름 만들고 DTO 필드값에 세팅
+                4. 로컬에 파일 저장
+                5. board_file_table에 저장 처리
+             */
             System.out.println("파일있음");
             boardDTO.setFileAttached(1);
             BoardDTO dto = boardRepository.save(boardDTO);
-            for (MultipartFile boardFile : boardDTO.getBoardFile()) {
+            for (MultipartFile boardFile: boardDTO.getBoardFile()) {
                 // 원본 파일 이름 가져오기
                 String originalFilename = boardFile.getOriginalFilename();
                 System.out.println("originalFilename = " + originalFilename);
@@ -50,7 +51,8 @@ public class BoardService {
                 boardFileDTO.setOriginalFileName(originalFilename);
                 boardFileDTO.setStoredFileName(storedFileName);
                 boardFileDTO.setBoardId(dto.getId());
-                // 로컬에 파일 저장 (저장할폴더\\+저장할이름) \\ → 반드시 추가할 것
+                // 로컬에 파일 저장
+                // 저장할 경로 설정 (저장할폴더+저장할이름)
                 String savePath = "D:\\springframework_img\\" + storedFileName;
                 // 저장처리
                 boardFile.transferTo(new File(savePath));
