@@ -55,11 +55,14 @@
             <th>파일첨부유무</th>
             <td>${board.fileAttached}</td>
         </tr>
-        <c:if test="${board.fileAttached ==1}">
+        <c:if test="${board.fileAttached == 1}">
         <tr>
             <th>이미지</th>
             <td>
-                <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt="">
+                <c:forEach items="${boardFileList}" var="boardFile">
+                <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}"
+                     alt="" width="100" height="100">
+                </c:forEach>
             </td>
         </tr>
         </c:if>
