@@ -4,11 +4,15 @@
 
 
 <mapper namespace="Board">
-    <insert id="save" parameterType="com.icia.board.dto.BoardDTO">
-        insert into board_table(boardWriter, boardPass, boardTitle, boardContents)
-        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+        insert into board_table(boardWriter, boardPass, boardTitle, boardContents, fileAttached)
+        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{fileAttached})
     </insert>
 
+    <insert id="saveFile" parameterType="boardFile">
+        insert into board_file_table(originalFileName, storedFileName, boardId)
+            values (#{originalFileName}, #{storedFileName}, #{boardId})
+    </insert>
     <select id="findAll" resultType="board">
         select * from board_table
     </select>

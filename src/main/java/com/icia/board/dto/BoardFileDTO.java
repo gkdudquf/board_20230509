@@ -8,8 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BoardFileDTO {
-    Long id;
-    String originalFileName;
-    String storedFileName;
-    Long boardId;
+    private Long id;
+    private String originalFileName;
+    private String storedFileName;
+    private Long boardId;
 }
