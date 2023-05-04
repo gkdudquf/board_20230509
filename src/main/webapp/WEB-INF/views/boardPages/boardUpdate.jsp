@@ -28,55 +28,55 @@
         <tr>
             <th>글번호</th>
             <td>
-                <input type="text" name="id" value="${boardDTO.id}" readonly>
+                <input type="text" name="id" value="${board.id}" readonly>
             </td>
         </tr>
         <tr>
             <th>작성자</th>
             <td>
-                <input type="text" name="boardWriter" value="${boardDTO.boardWriter}" readonly>
+                <input type="text" name="boardWriter" value="${board.boardWriter}" readonly>
             </td>
         </tr>
         <tr>
             <th>비밀번호</th>
             <td>
-                <input type="text" name="boardPass" id="board-pass">
+                <input type="text" name="boardPass" id="board-pass" placeholder="비밀번호를 입력하세요">
             </td>
         </tr>
         <tr>
             <th>제목</th>
             <td>
-                <input type="text" name="boardTitle" value="${boardDTO.boardTitle}">
+                <input type="text" name="boardTitle" value="${board.boardTitle}">
             </td>
         </tr>
         <tr>
             <th>내용</th>
             <td>
-                <input type="text" name="boardContents" value="${boardDTO.boardContents}">
+                <textarea name="boardContents" cols="30" rows="10">${board.boardContents}"</textarea>
             </td>
         </tr>
         <tr>
             <th>작성일</th>
             <td>
-                <input type="text" name="boardCreatedDate" value="${boardDTO.boardCreatedDate}" readonly>
+                <input type="text" name="boardCreatedDate" value="${board.boardCreatedDate}" readonly>
             </td>
         </tr>
         <tr>
             <th>조회수</th>
             <td>
-                <input type="text" name="boardHits" value="${boardDTO.boardHits}" readonly>
+                <input type="text" name="boardHits" value="${board.boardHits}" readonly>
             </td>
         </tr>
     </table>
-        <input type="button" onclick="update_check()" value="수정">
+        <input type="button" onclick="update_req()" value="수정">
     </form>
 </div>
 <%@include file="../component/footer.jsp"%>
 </body>
 <script>
-    const update_check = () => {
+    const update_req = () => {
         const inputPass = document.getElementById("board-pass").value;
-        const DBPass = '${boardDTO.boardPass}';
+        const DBPass = '${board.boardPass}';
         if (inputPass == DBPass) {
             document.updateForm.submit();
         } else {

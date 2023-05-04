@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -17,27 +18,22 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="../component/header.jsp"%>
-<%@include file="../component/nav.jsp"%>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
 
 <div id="section">
 
-    <input type="text" name="boardPass" id="board-pass" placeholder="비밀번호">
-    <button onclick="pass_check()">확인</button>
+<h2>자유게시판</h2>
+    <input type="text" name="searchKeyword" id="search_keyword" placeholder="검색어를 입력하세요" style="">
+    <button onclick="board_search()">검색</button>
 </div>
-<%@include file="../component/footer.jsp"%>
+<%@include file="../component/footer.jsp" %>
 </body>
 <script>
-    const pass_check = () => {
-        const passInput = document.getElementById("board-pass").value;
-        const DBPass = '${board.boardPass}';
-        const id = '${board.id}';
-        if (passInput == DBPass) {
-            location.href = "/board/delete?id=" + id;
-        } else {
-            alert("비밀번호가 일치하지 않습니다")
-        }
-    }
+ const board_search = () => {
+     const searchKeyword = document.getElementById("search_keyword").value;
+     location.href = "/board/search?"
+ }
 </script>
 
 </html>

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -17,8 +18,8 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="../component/header.jsp"%>
-<%@include file="../component/nav.jsp"%>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
 
 <div id="section">
 
@@ -26,45 +27,53 @@
     <table>
         <tr>
             <th>번호</th>
-            <td>${boardDTO.id}</td>
+            <td>${board.id}</td>
         </tr>
         <tr>
             <th>작성자</th>
-            <td>${boardDTO.boardWriter}</td>
+            <td>${board.boardWriter}</td>
         </tr>
         <tr>
             <th>글제목</th>
-            <td>${boardDTO.boardTitle}</td>
+            <td>${board.boardTitle}</td>
         </tr>
         <tr>
             <th>내용</th>
-            <td>${boardDTO.boardContents}</td>
+            <td>${board.boardContents}</td>
         </tr>
         <tr>
             <th>작성일</th>
-            <td>${boardDTO.boardCreatedDate}</td>
+            <td>
+                <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+            </td>
         </tr>
         <tr>
             <th>조회수</th>
-            <td>${boardDTO.boardHits}</td>
+            <td>${board.boardHits}</td>
         </tr>
         <tr>
             <th>파일첨부유무</th>
-            <td>${boardDTO.fileAttached}</td>
+            <td>${board.fileAttached}</td>
         </tr>
     </table>
-    <button onclick="board_detail('${boardDTO.id}')">수정</button>
-    <button onclick="board_delete('${boardDTO.id}')">삭제</button>
+    <button onclick="board_list()">목록</button>
+    <button onclick="board_detail()">수정</button>
+    <button onclick="board_delete('${board.id}')">삭제</button>
 </div>
-<%@include file="../component/footer.jsp"%>
+<%@include file="../component/footer.jsp" %>
 </body>
 <script>
-    const board_detail = (id) => {
+    const board_list = () => {
+        location.href = "/board/";
+    }
+
+    const board_detail = () => {
+        const id = '${board.id}'
         location.href = "/board/update?id=" + id;
     }
 
     const board_delete = (id) => {
-        location.href = "/board/deleteCheck?id=" + id;
+        location.href = "/board/delete-check?id=" + id;
     }
 </script>
 

@@ -45,27 +45,29 @@ public class BoardController {
     public String detailForm(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         boardService.updateHits(id);
-        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("board", boardDTO);
         return "boardPages/boardDetail";
     }
 
     @GetMapping("/update")
     public String updateForm(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("board", boardDTO);
         return "boardPages/boardUpdate";
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute BoardDTO boardDTO) {
+    public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         boardService.update(boardDTO);
+        BoardDTO dto = boardService.findById(boardDTO.getId());
+        model.addAttribute("board", dto);
         return "boardPages/boardDetail";
-    }
+    } //redirect:board?id="+boardDTO.getId();로 하면 수정 시, 조회수가 올라감
 
-    @GetMapping("/deleteCheck")
+    @GetMapping("/delete-check")
     public String deleteCheck(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("board", boardDTO);
         return "boardPages/deleteCheck";
     }
 

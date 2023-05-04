@@ -33,7 +33,7 @@ li a:hover {
 }
 
 #section {
-    height: 400px;
+    height: 600px;
 }
 
 #section table {
@@ -49,5 +49,9 @@ li a:hover {
     background-color: black;
     color: white;
     padding: 20px;
+}
+
+#nav {
+    height: auto;
 }
 
