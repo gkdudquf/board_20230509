@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -40,7 +39,9 @@ public class BoardController {
         return "boardPages/boardList";
     }
 
-    @GetMapping("")
+
+
+    @GetMapping
     public String findById(@RequestParam("id") Long id, Model model) {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);

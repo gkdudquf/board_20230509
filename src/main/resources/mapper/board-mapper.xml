@@ -13,6 +13,7 @@
         insert into board_file_table(originalFileName, storedFileName, boardId)
             values (#{originalFileName}, #{storedFileName}, #{boardId})
     </insert>
+
     <select id="findAll" resultType="board">
         select * from board_table
     </select>
