@@ -12,7 +12,6 @@ public class CommentRepository {
     @Autowired
     private SqlSessionTemplate sql;
 
-
     public void save(CommentDTO commentDTO) {
         sql.insert("Comment.save", commentDTO);
     }

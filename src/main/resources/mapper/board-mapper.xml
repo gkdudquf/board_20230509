@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="Board">
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
         insert into board_table(boardWriter, boardPass, boardTitle, boardContents, fileAttached)
@@ -18,16 +17,17 @@
         select * from board_table
     </select>
 
-    <select id="findById" parameterType="Long" resultType="board">
-        select * from board_table where id=#{id}
-    </select>
-
     <update id="updateHits" parameterType="Long">
         update board_table set boardHits=boardHits+1 where id=#{id}
     </update>
 
-    <update id="update" parameterType="board" >
-        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents} where id=#{id}
+    <select id="findById" parameterType="Long" resultType="board">
+        select * from board_table where id=#{id}
+    </select>
+
+    <update id="update" parameterType="board">
+        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents}
+            where id=#{id}
     </update>
 
     <delete id="delete" parameterType="Long">
@@ -41,4 +41,17 @@
     <select id="paging" parameterType="java.util.HashMap" resultType="board">
         select * from board_table order by id desc limit #{start}, #{limit}
     </select>
+
+    <select id="count" resultType="Integer">
+        select count(id) from board_table
+    </select>
 </mapper>
+
+
+
+
+
+
+
+
+

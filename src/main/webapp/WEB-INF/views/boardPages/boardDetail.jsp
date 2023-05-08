@@ -1,85 +1,74 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 2023-05-03
-  Time: 오전 9:16
+  Date: 2023-04-28
+  Time: 오후 2:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="/resources/css/main.css">
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
 <%@include file="../component/nav.jsp" %>
 
 <div id="section">
-
-
     <table>
         <tr>
-            <th>번호</th>
+            <th>id</th>
             <td>${board.id}</td>
-        </tr>
         <tr>
-            <th>작성자</th>
+            <th>writer</th>
             <td>${board.boardWriter}</td>
         </tr>
         <tr>
-            <th>글제목</th>
-            <td>${board.boardTitle}</td>
-        </tr>
-        <tr>
-            <th>내용</th>
-            <td>${board.boardContents}</td>
-        </tr>
-        <tr>
-            <th>작성일</th>
+            <th>date</th>
             <td>
-                <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+                <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
             </td>
         </tr>
         <tr>
-            <th>조회수</th>
+            <th>hits</th>
             <td>${board.boardHits}</td>
         </tr>
         <tr>
-            <th>파일첨부유무</th>
-            <td>${board.fileAttached}</td>
+            <th>title</th>
+            <td>${board.boardTitle}</td>
+        </tr>
+        <tr>
+            <th>contents</th>
+            <td>${board.boardContents}</td>
         </tr>
         <c:if test="${board.fileAttached == 1}">
-        <tr>
-            <th>이미지</th>
-            <td>
-                <c:forEach items="${boardFileList}" var="boardFile">
-                <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}"
-                     alt="" width="100" height="100">
-                </c:forEach>
-            </td>
-        </tr>
+            <tr>
+                <th>image</th>
+                <td>
+                    <c:forEach items="${boardFileList}" var="boardFile">
+                        <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}"
+                             alt="" width="100" height="100">
+                    </c:forEach>
+                </td>
+            </tr>
         </c:if>
     </table>
     <button onclick="board_list()">목록</button>
-    <button onclick="board_detail()">수정</button>
-    <button onclick="board_delete('${board.id}')">삭제</button>
+    <button onclick="board_update()">수정</button>
+    <button onclick="board_delete()">삭제</button>
 
-    <div id="comment-writer-area">
+    <div id="comment-write-area">
         <input type="text" id="comment-writer" placeholder="댓글 작성자">
         <input type="text" id="comment-contents" placeholder="댓글 내용">
         <button onclick="comment_write()">댓글작성</button>
     </div>
-
     <div id="comment-list">
         <c:choose>
             <c:when test="${commentList == null}">
@@ -99,17 +88,14 @@
                             <td>${comment.commentWriter}</td>
                             <td>${comment.commentContents}</td>
                             <td>
-                                <fmt:formatDate value="${comment.commentCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+                                <fmt:formatDate value="${comment.commentCreatedDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                             </td>
                         </tr>
                     </c:forEach>
-
                 </table>
             </c:otherwise>
         </c:choose>
     </div>
-
-
 
 </div>
 <%@include file="../component/footer.jsp" %>
@@ -121,13 +107,13 @@
         const boardId = '${board.id}';
         const result = document.getElementById("comment-list");
         $.ajax({
-            type: "post",
-            url: "/comment/save",
-            data: {
-                "commentWriter": commentWriter,
-                "commentContents": commentContents,
-                "boardId": boardId
-            },
+           type: "post",
+           url: "/comment/save",
+           data: {
+               "commentWriter": commentWriter,
+               "commentContents": commentContents,
+               "boardId": boardId
+           },
             success: function (res) {
                 console.log(res);
                 let output = "<table>";
@@ -155,20 +141,16 @@
             }
         });
     }
-
     const board_list = () => {
         location.href = "/board/";
     }
-
-    const board_detail = () => {
-        const id = '${board.id}'
+    const board_update = () => {
+        const id = '${board.id}';
         location.href = "/board/update?id=" + id;
     }
-
-    const board_delete = (id) => {
+    const board_delete = () => {
+        const id = '${board.id}';
         location.href = "/board/delete-check?id=" + id;
     }
-
 </script>
-
 </html>

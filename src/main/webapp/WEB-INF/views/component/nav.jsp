@@ -1,21 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-05-03
-  Time: 오전 9:52
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div id="nav">
     <ul>
         <li>
-            <a href="/"><i class="bi bi-house"></i></a>
+            <a href="/">
+                <i class="bi bi-house"></i>
+            </a>
         </li>
         <li>
-            <a href="/board/save">게시글 작성</a>
+            <a href="/board/save">글작성</a>
         </li>
         <li>
-            <a href="/board/">게시글 목록</a>
+            <a href="/board/">글목록</a>
+        </li>
+        <li>
+            <a href="/board/paging">페이징목록</a>
+        </li>
+        <li class="login-name" id="login-area">
+
         </li>
     </ul>
 </div>
+
+<script>
+    const loginArea = document.getElementById("login-area");
+    const loginEmail = '${sessionScope.loginEmail}';
+    console.log(loginEmail.length);
+
+    if (loginEmail.length != 0) {
+        loginArea.innerHTML = "<a href='/mypage' style='color: black;'>"+loginEmail +"님 환영해요!</a>"+
+                                "<a href='/logout'>logout</a>";
+    } else {
+        loginArea.innerHTML = "<a href='/login'>login</a>";
+    }
+</script>
