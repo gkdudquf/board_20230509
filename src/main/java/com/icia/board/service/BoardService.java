@@ -9,7 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -79,6 +81,7 @@ public class BoardService {
     }
 
 
+
     public void update(BoardDTO boardDTO) {
         boardRepository.update(boardDTO);
     }
@@ -88,4 +91,13 @@ public class BoardService {
     }
 
 
+    public List<BoardDTO> pagingList(int page) {
+        int pageLimit = 3; // 한페이지에 보여줄 글 갯수
+        int pagingStart = (page-1) * pageLimit;
+        Map<String, Integer> pagingParam = new HashMap<>();
+        pagingParam.put("start", pagingStart);
+        pagingParam.put("limit", pageLimit);
+        List<BoardDTO> boardDTOList = boardRepository.pagingList(pagingParam);
+        return boardDTOList;
+    }
 }

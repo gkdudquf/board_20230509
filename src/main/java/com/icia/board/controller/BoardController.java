@@ -3,6 +3,7 @@ package com.icia.board.controller;
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.dto.CommentDTO;
+import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
 import com.icia.board.service.CommentService;
 import lombok.Getter;
@@ -42,6 +43,21 @@ public class BoardController {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList",boardDTOList);
         return "boardPages/boardList";
+    }
+
+    @GetMapping("/paging") //RequestParam()안에 값이 무조건 있어야되지만, required=false로 지정하면 값이 없어도 되며, defaultValue는 값이 없을경우 기본값을 1로 지정한다는 뜻
+    public String paging(@RequestParam(value="page", required = false, defaultValue = "1") int page,
+                         Model model) {
+        System.out.println("page = " + page);
+        //사용자가 요청한 페이지에 해당하는 글 목록 데이터
+        List<BoardDTO> boardDTOList = boardService.pagingList(page);
+        System.out.println("boardDTOList = " + boardDTOList);
+        //하단에 보여줄 페이지 번호 목록 데이터
+//        PageDTO pageDTO = boardService.pagingParam(page);
+        model.addAttribute("boardList", boardDTOList);
+//        model.addAttribute("paging", pageDTO);
+        return "boardPages/boardPaging";
+
     }
 
     @GetMapping

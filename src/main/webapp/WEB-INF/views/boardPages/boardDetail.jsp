@@ -132,10 +132,10 @@
                 console.log(res);
                 let output = "<table>";
                 output += "<tr>";
-                output += "<td>id</th>";
-                output += "<td>작성자</th>";
-                output += "<td>내용</th>";
-                output += "<td>작성시간</th>";
+                output += "<th>id</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
                 output += "</tr>";
                 for(let i in res) {
                     output += "<tr>";
