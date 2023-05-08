@@ -2,7 +2,9 @@ package com.icia.board.controller;
 
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
+import com.icia.board.dto.CommentDTO;
 import com.icia.board.service.BoardService;
+import com.icia.board.service.CommentService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private CommentService commentService;
+
 
 //    @GetMapping("/board/save")
     @GetMapping("/save") //@RequestMapping 때문에 "/board" 생략가능
@@ -48,6 +53,12 @@ public class BoardController {
            List<BoardFileDTO> boardFileDTO = boardService.findFile(id);
             model.addAttribute("boardFileList", boardFileDTO);
             System.out.println("boardFileDTO = " + boardFileDTO);
+        }
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        if (commentDTOList.size() == 0) {
+            model.addAttribute("commentList", null);
+        } else {
+            model.addAttribute("commentList", commentDTOList);
         }
         return "boardPages/boardDetail";
     }
