@@ -70,7 +70,17 @@
     <button onclick="board_list()">목록</button>
     <button onclick="board_detail()">수정</button>
     <button onclick="board_delete('${board.id}')">삭제</button>
+
+    <div id="comment-write-area">
+        <input type="text" id="comment-writer" placeholder="댓글 작성자">
+        <input type="text" id="comment-contents" placeholder="댓글 내용">
+        <button onclick="comment_write()">댓글작성</button>
+    </div>
 </div>
+<div id="comment-list">
+
+</div>
+
 <%@include file="../component/footer.jsp" %>
 </body>
 <script>
@@ -85,6 +95,25 @@
 
     const board_delete = (id) => {
         location.href = "/board/delete-check?id=" + id;
+    }
+
+    const comment_write = () => {
+        const commentWriter = document.getElementById("comment-writer").value;
+        const commentContents = document.getElementById("comment-contents").value;
+        const boardId = '${board.id}';
+        const result = document.getElementById("comment-list");
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            data: {
+                "commentWriter": commentWriter,
+                "commentContents": commentContents,
+                "boardId": boardId
+            },
+            success: function (res) {
+                console.log(res);
+            }
+        })
     }
 </script>
 
