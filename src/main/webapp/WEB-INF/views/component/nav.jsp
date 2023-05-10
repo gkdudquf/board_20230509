@@ -12,7 +12,10 @@
             <a href="/"><i class="bi bi-house"></i></a>
         </li>
         <li>
-            <a href="/board/save">게시글 작성</a>
+            <a href="/member/save">회원가입</a>
+        </li>
+        <li>
+            <a href="/member/login">게시글 작성</a>
         </li>
         <li>
             <a href="/board/">게시글 목록</a>
