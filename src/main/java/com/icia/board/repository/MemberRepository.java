@@ -1,7 +1,25 @@
 package com.icia.board.repository;
 
+import com.icia.board.dto.MemberDTO;
+import com.icia.board.dto.ProfileDTO;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberRepository {
+    @Autowired
+     private SqlSessionTemplate sql;
+    public MemberDTO save(MemberDTO memberDTO) {
+        sql.insert("Member.save", memberDTO);
+        return memberDTO;
+    }
+
+    public MemberDTO emailCheck(String memberEmail) {
+        return sql.selectOne("Member.emailCheck", memberEmail);
+    }
+
+    public void saveFile(ProfileDTO profileDTO) {
+        sql.insert("Member.saveFile", profileDTO);
+    }
 }

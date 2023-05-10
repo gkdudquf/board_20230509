@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="nav">
     <ul>
-        <li>
-            <a href="/"><i class="bi bi-house"></i></a>
+        <li id="house">
+            <a href="/"><i class="bi bi-house" ></i></a>
         </li>
         <li>
             <a href="/member/save">회원가입</a>

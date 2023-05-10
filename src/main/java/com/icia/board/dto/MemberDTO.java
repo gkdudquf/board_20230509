@@ -12,5 +12,5 @@ public class MemberDTO {
     private String memberPassword;
     private String memberName;
     private String memberMobile;
-    private List<MultipartFile> boardFile;
+    private List<MultipartFile> profileFile;
 }

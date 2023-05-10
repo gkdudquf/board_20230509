@@ -23,7 +23,8 @@
 
 
 </div>
+<%@include file="component/footer.jsp"%>
 </body>
 
-<%@include file="component/footer.jsp"%>
+
 </html>
