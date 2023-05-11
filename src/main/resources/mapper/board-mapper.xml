@@ -4,5 +4,17 @@
 
 
 <mapper namespace="Board">
+    <insert id="save" parameterType="board">
+        insert into board_table (boardTitle, boardWriter, boardContents, fileAttached, memberId)
+        values (#{boardTitle}, #{boardWriter},#{boardContents}, #{fileAttached}, #{memberId})
+    </insert>
 
+    <insert id="saveFile" parameterType="boardFile">
+        insert into board_file_table (originalFileName, storedFileName, boardId)
+        values (#{originalFileName}, #{storedFileName}, #{boardId})
+    </insert>
+
+    <select id="findAll" resultType="board">
+        select * from board_table
+    </select>
 </mapper>

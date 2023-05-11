@@ -29,7 +29,7 @@ public class MemberService {
                 profileDTO.setOriginalFileName(originalFileName);
                 profileDTO.setStoredFileName(storedFileName);
                 profileDTO.setMemberId(dto.getId());
-                String savePath = "D:\\profile_img\\" + storedFileName;
+                String savePath = "D:\\2023.05.09_board\\profile_img\\" + storedFileName;
                 profile.transferTo(new File(savePath));
                 memberRepository.saveFile(profileDTO);
                 System.out.println("memberDTO = " + memberDTO);

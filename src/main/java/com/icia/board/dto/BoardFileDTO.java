@@ -9,3 +9,5 @@ public class BoardFileDTO {
     private String storedFileName;
     private Long boardId;
 }
+
+

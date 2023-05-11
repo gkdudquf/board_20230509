@@ -18,7 +18,7 @@
             <a href="/member/login">로그인</a>
         </li>
         <li>
-            <a href="/member/login">게시글 작성</a>
+            <a href="/board/save">게시글 작성</a>
         </li>
         <li>
             <a href="/board/">게시글 목록</a>
