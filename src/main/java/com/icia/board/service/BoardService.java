@@ -22,7 +22,6 @@ public class BoardService {
             boardRepository.save(boardDTO);
         }else {
             boardDTO.setFileAttached(1);
-
             BoardDTO dto = boardRepository.save(boardDTO);
             for (MultipartFile boardFile: boardDTO.getBoardFile()) {
                 String originalFileName = boardFile.getOriginalFilename();
@@ -46,5 +45,13 @@ public class BoardService {
 
     public BoardDTO findById(Long id) {
         return boardRepository.findById(id);
+    }
+
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
+    public List<BoardFileDTO> findFile(Long id) {
+        return boardRepository.findFile(id);
     }
 }

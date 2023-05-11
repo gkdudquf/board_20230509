@@ -1,6 +1,7 @@
 package com.icia.board.controller;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,8 +40,14 @@ public class BoardController {
 
     @GetMapping("/detail")
     public String detail(@RequestParam("id") Long id, Model model) {
+        boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+        System.out.println("boardDTO = " + boardDTO);
         model.addAttribute("board", boardDTO);
+        if (boardDTO.getFileAttached() == 1) {
+            List<BoardFileDTO> boardDTOList = boardService.findFile(id);
+            model.addAttribute("boardFileList", boardDTOList);
+        }
         return "/boardPages/boardDetail";
     }
 
