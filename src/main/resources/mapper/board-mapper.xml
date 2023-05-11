@@ -4,7 +4,7 @@
 
 
 <mapper namespace="Board">
-    <insert id="save" parameterType="board">
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
         insert into board_table (boardTitle, boardWriter, boardContents, fileAttached, memberId)
         values (#{boardTitle}, #{boardWriter},#{boardContents}, #{fileAttached}, #{memberId})
     </insert>
@@ -16,5 +16,9 @@
 
     <select id="findAll" resultType="board">
         select * from board_table
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="board">
+        select * from board_table where id=${id}
     </select>
 </mapper>

@@ -55,3 +55,8 @@ li a {
     height: auto;
 }
 
+#nav ul li.login-name {
+    float: right;
+}
+
+

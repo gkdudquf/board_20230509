@@ -13,7 +13,7 @@ public class BoardDTO {
     private String boardWriter;
     private String boardContents;
     private int boardHits;
-    private Timestamp boardCreateDate;
+    private Timestamp boardCreatedDate;
     private int fileAttached;
     private List<MultipartFile> boardFile;
     private Long memberId;

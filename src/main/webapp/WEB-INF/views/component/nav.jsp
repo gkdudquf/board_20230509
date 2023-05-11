@@ -15,13 +15,27 @@
             <a href="/member/save">회원가입</a>
         </li>
         <li>
-            <a href="/member/login">로그인</a>
-        </li>
-        <li>
             <a href="/board/save">게시글 작성</a>
         </li>
         <li>
             <a href="/board/">게시글 목록</a>
         </li>
+        <li class="login-name" id="login-area">
+
+        </li>
     </ul>
 </div>
+
+<script>
+    const loginArea = document.getElementById("login-area");
+    const loginEmail = '${sessionScope.loginEmail}';
+
+    if (loginEmail.length != 0) {
+        loginArea.innerHTML = "<a href='/member/mypage' style='color: black;'>" + loginEmail + "님 환영해요!</a>" +
+                                "<a href='/member/logout'>logout</a>";
+    } else {
+        loginArea.innerHTML = "<a href='/member/login'>login</a>";
+    }
+
+
+</script>

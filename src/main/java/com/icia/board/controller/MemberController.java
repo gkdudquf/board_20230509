@@ -50,9 +50,20 @@ public class MemberController {
         boolean loginResult = memberService.loginCheck(memberDTO);
         if (loginResult) {
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-            return "redirect: /boardList";
+            return "redirect:/board/";
         } else {
             return "/memberPages/memberLogin";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/mypage")
+    public String myPage() {
+        return "/memberPages/memberMypage";
     }
 }
