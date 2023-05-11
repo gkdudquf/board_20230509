@@ -41,4 +41,14 @@ public class MemberService {
     public MemberDTO emailCheck(String memberEmail) {
         return memberRepository.emailCheck(memberEmail);
     }
+
+    public boolean loginCheck(MemberDTO memberDTO) {
+        MemberDTO dto = memberRepository.loginCheck(memberDTO);
+        if (dto != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

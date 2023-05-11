@@ -20,7 +20,11 @@
 <%@include file="../component/nav.jsp"%>
 
 <div id="section">
-
+    <form action="/member/login" method="post">
+        <input type="text" name="memberEmail" placeholder="이메일을 입력해주세요"> <br>
+        <input type="text" name="memberPassword" placeholder="비밀번호를 입력해주세요"> <br>
+        <input type="submit" value="로그인">
+    </form>
 
 </div>
 <%@include file="../component/footer.jsp"%>

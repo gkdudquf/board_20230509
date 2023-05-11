@@ -17,4 +17,8 @@
         insert into member_profile_table(originalFileName, storedFileName, memberId)
         values (#{originalFileName}, #{storedFileName}, #{memberId})
     </insert>
+
+    <select id="loginCheck" parameterType="member" resultType="member">
+        select * from member_table where memberEmail=#{memberEmail} and memberPassword=#{memberPassword}
+    </select>
 </mapper>
