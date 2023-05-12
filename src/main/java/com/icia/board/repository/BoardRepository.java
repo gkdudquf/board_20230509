@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardRepository {
@@ -36,5 +37,17 @@ public class BoardRepository {
 
     public List<BoardFileDTO> findFile(Long id) {
         return sql.selectList("Board.findFile", id);
+    }
+
+    public List<BoardDTO> pagingList(Map<String, Integer> pagingParams) {
+        return sql.selectList("Board.paging", pagingParams);
+    }
+
+    public int boardCount() {
+        return sql.selectOne("Board.count");
+    }
+
+    public List<BoardDTO> searchList(Map<String, Object> pagingParam) {
+        return sql.selectList("Board.search", pagingParam);
     }
 }

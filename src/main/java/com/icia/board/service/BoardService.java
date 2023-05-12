@@ -3,6 +3,7 @@ package com.icia.board.service;
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.dto.MemberDTO;
+import com.icia.board.dto.PageDTO;
 import com.icia.board.repository.BoardRepository;
 import com.icia.board.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardService {
@@ -59,5 +62,49 @@ public class BoardService {
 
     public List<BoardFileDTO> findFile(Long id) {
         return boardRepository.findFile(id);
+    }
+
+    public List<BoardDTO> pagingList(int page) {
+        int pageLimit = 5;
+        int pagingStart = (page-1) * pageLimit;
+        Map<String, Integer> pagingParams = new HashMap<>();
+        pagingParams.put("start", pagingStart);
+        pagingParams.put("limit", pageLimit);
+        List<BoardDTO> boardDTOList = boardRepository.pagingList(pagingParams);
+        return boardDTOList;
+    }
+
+    public PageDTO pagingParam(int page) {
+        int pageLimit = 3;
+        int blockLimit = 3;
+        int boardCount = boardRepository.boardCount();
+        int maxPage = (int) (Math.ceil((double)boardCount / pageLimit));
+        int startPage = (((int)(Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = startPage + blockLimit - 1;
+        if (endPage > maxPage) {
+            endPage = maxPage;
+        }
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setStartPage(startPage);
+        pageDTO.setEndPage(endPage);
+        pageDTO.setMaxPage(maxPage);
+        return pageDTO;
+    }
+
+    public List<BoardDTO> searchList(int page, String type, String q) {
+        int pageLimit = 3;
+        int pageStart = (page-1) * pageLimit;
+        Map<String, Object> pagingParam = new HashMap<>();
+        pagingParam.put("start", pageStart);
+        pagingParam.put("limit", pageLimit);
+        pagingParam.put("q", q);
+        pagingParam.put("type", type);
+        List<BoardDTO> boardDTOList = boardRepository.searchList(pagingParam);
+        return boardDTOList;
+    }
+
+    public PageDTO pagingSearchParam(int page, String type, String q) {
+        int page
     }
 }

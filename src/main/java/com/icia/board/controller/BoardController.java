@@ -2,7 +2,9 @@ package com.icia.board.controller;
 
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
+import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,5 +53,20 @@ public class BoardController {
         return "/boardPages/boardDetail";
     }
 
+    @GetMapping("/paging")
+    public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
+                         Model model) {
+//        List<BoardDTO> boardDTOList = null;
+//        PageDTO pageDTO = null;
+        if (q.equals("")) {
+            List<BoardDTO> boardDTOList = boardService.pagingList(page);
+            PageDTO pageDTO = boardService.pagingParam(page);
+        } else {
+            List<BoardDTO> boardDTOList = boardService.searchList(page, type, q);
+            PageDTO pageDTO = boardService.pagingSearchParam(page, type, q);
+        }
+    }
 
 }
