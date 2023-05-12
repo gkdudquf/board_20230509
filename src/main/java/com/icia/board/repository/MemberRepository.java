@@ -26,4 +26,9 @@ public class MemberRepository {
     public MemberDTO loginCheck(MemberDTO memberDTO) {
         return sql.selectOne("Member.loginCheck", memberDTO);
     }
+
+
+    public MemberDTO findById(String boardWriter) {
+        return sql.selectOne("Member.findById", boardWriter);
+    }
 }

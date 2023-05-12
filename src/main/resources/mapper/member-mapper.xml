@@ -21,4 +21,8 @@
     <select id="loginCheck" parameterType="member" resultType="member">
         select * from member_table where memberEmail=#{memberEmail} and memberPassword=#{memberPassword}
     </select>
+
+    <select id="findById" parameterType="String" resultType="member">
+        select * from member_table where memberEmail=#{memberEmail}
+    </select>
 </mapper>

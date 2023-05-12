@@ -2,7 +2,9 @@ package com.icia.board.service;
 
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
+import com.icia.board.dto.MemberDTO;
 import com.icia.board.repository.BoardRepository;
+import com.icia.board.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +17,12 @@ import java.util.List;
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     public void save(BoardDTO boardDTO) throws IOException {
+        MemberDTO memberDTO = memberRepository.findById(boardDTO.getBoardWriter());
+        boardDTO.setMemberId(memberDTO.getId());
         if (boardDTO.getBoardFile().get(0).isEmpty()) {
             boardDTO.setFileAttached(0);
             boardRepository.save(boardDTO);
