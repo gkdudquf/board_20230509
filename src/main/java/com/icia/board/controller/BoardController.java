@@ -4,8 +4,9 @@ import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,15 +59,39 @@ public class BoardController {
                          @RequestParam(value = "q", required = false, defaultValue = "") String q,
                          @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
                          Model model) {
-//        List<BoardDTO> boardDTOList = null;
-//        PageDTO pageDTO = null;
+        List<BoardDTO> boardDTOList = null;
+        PageDTO pageDTO = null;
         if (q.equals("")) {
-            List<BoardDTO> boardDTOList = boardService.pagingList(page);
-            PageDTO pageDTO = boardService.pagingParam(page);
+            boardDTOList = boardService.pagingList(page);
+            pageDTO = boardService.pagingParam(page);
         } else {
-            List<BoardDTO> boardDTOList = boardService.searchList(page, type, q);
-            PageDTO pageDTO = boardService.pagingSearchParam(page, type, q);
+            boardDTOList = boardService.searchList(page, type, q);
+            pageDTO = boardService.pagingSearchParam(page, type, q);
         }
+        model.addAttribute("boardList", boardDTOList);
+        model.addAttribute("paging", pageDTO);
+        model.addAttribute("q", q);
+        model.addAttribute("type", type);
+        return "boardPages/boardPaging";
+    }
+
+    @GetMapping
+    public String findById(@RequestParam("id") Long id,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                               @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                               @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
+                               Model model) {
+        boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        model.addAttribute("page", page);
+        model.addAttribute("q", q);
+        model.addAttribute("type", type);
+        if (boardDTO.getFileAttached() == 1) {
+            List<BoardFileDTO> boardFileDTO = boardService.findFile(id);
+            model.addAttribute("boardFileList", boardFileDTO);
+        }
+        return "boardPages/boardDetail";
     }
 
 }

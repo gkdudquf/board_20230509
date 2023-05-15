@@ -20,6 +20,9 @@
         <li>
             <a href="/board/">게시글 목록</a>
         </li>
+        <li>
+            <a href="/board/paging">페이징목록</a>
+        </li>
         <li class="login-name" id="login-area">
 
         </li>

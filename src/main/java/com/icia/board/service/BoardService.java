@@ -75,7 +75,7 @@ public class BoardService {
     }
 
     public PageDTO pagingParam(int page) {
-        int pageLimit = 3;
+        int pageLimit = 5;
         int blockLimit = 3;
         int boardCount = boardRepository.boardCount();
         int maxPage = (int) (Math.ceil((double)boardCount / pageLimit));
@@ -93,7 +93,7 @@ public class BoardService {
     }
 
     public List<BoardDTO> searchList(int page, String type, String q) {
-        int pageLimit = 3;
+        int pageLimit = 5;
         int pageStart = (page-1) * pageLimit;
         Map<String, Object> pagingParam = new HashMap<>();
         pagingParam.put("start", pageStart);
@@ -105,6 +105,23 @@ public class BoardService {
     }
 
     public PageDTO pagingSearchParam(int page, String type, String q) {
-        int page
+        int pageLimit = 5;
+        int blockLimit = 3;
+        Map<String, Object> pagingParams = new HashMap<>();
+        pagingParams.put("q", q);
+        pagingParams.put("type", type);
+        int boardCount = boardRepository.boardSearchCount(pagingParams);
+        int maxPage = (int)(Math.ceil((double)boardCount / pageLimit));
+        int startPage = (((int)(Math.ceil((double)page / pageLimit))) -1 ) * blockLimit + 1;
+        int endPage = page + blockLimit - 1;
+        if (endPage > maxPage) {
+            endPage = maxPage;
+        }
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setMaxPage(maxPage);
+        pageDTO.setEndPage(endPage);
+        pageDTO.setStartPage(startPage);
+        return pageDTO;
     }
 }

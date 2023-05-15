@@ -50,4 +50,8 @@ public class BoardRepository {
     public List<BoardDTO> searchList(Map<String, Object> pagingParam) {
         return sql.selectList("Board.search", pagingParam);
     }
+
+    public int boardSearchCount(Map<String, Object> pagingParams) {
+        return sql.selectOne("Board.searchCount", pagingParams);
+    }
 }
