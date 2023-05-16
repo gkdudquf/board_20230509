@@ -2,9 +2,11 @@ package com.icia.board.controller;
 
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
+import com.icia.board.dto.CommentDTO;
 import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
 
+import com.icia.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/save")
     public String saveForm() {
@@ -50,6 +54,15 @@ public class BoardController {
         if (boardDTO.getFileAttached() == 1) {
             List<BoardFileDTO> boardDTOList = boardService.findFile(id);
             model.addAttribute("boardFileList", boardDTOList);
+        }
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        System.out.println(commentDTOList);
+        if (commentDTOList.size() == 0) {
+            model.addAttribute("commentList", null);
+            System.out.println("size 0 일때"+commentDTOList);
+        } else {
+            System.out.println("size 0 아닐 때" + commentDTOList);
+            model.addAttribute("commentList", commentDTOList);
         }
         return "/boardPages/boardDetail";
     }
@@ -91,12 +104,35 @@ public class BoardController {
             List<BoardFileDTO> boardFileDTO = boardService.findFile(id);
             model.addAttribute("boardFileList", boardFileDTO);
         }
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        System.out.println(commentDTOList);
+        if (commentDTOList.size() == 0) {
+            model.addAttribute("commentList", null);
+            System.out.println("size 0 일때"+commentDTOList);
+        } else {
+            System.out.println("size 0 아닐 때" + commentDTOList);
+            model.addAttribute("commentList", commentDTOList);
+        }
         return "boardPages/boardDetail";
     }
 
     @GetMapping("/update")
     public String updateForm(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("id", id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
         return "/boardPages/boardUpdate";
     }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
+        boardService.update(boardDTO);
+        BoardDTO dto = boardService.findById(boardDTO.getId());
+        List<CommentDTO> commentDTOList = commentService.findAll(boardDTO.getId());
+        model.addAttribute("board", dto);
+        model.addAttribute("commentList", commentDTOList);
+        System.out.println("dto = " + dto);
+        return "boardPages/boardDetail";
+    }
+
+
 }

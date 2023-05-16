@@ -45,4 +45,8 @@
     <select id="searchCount" parameterType="java.util.HashMap" resultType="Integer">
         select count(id) from board_table where ${type} like concat('%', #{q}, '%')
     </select>
+
+    <update id="update" parameterType="board">
+        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents} where id=#{id}
+    </update>
 </mapper>

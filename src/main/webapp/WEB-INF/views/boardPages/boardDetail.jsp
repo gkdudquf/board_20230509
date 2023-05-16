@@ -134,7 +134,6 @@
                 }
                 output += "</table>";
                 result.innerHTML = output;
-                document.getElementById("comment-writer").value = "";
                 document.getElementById("comment-contents").value = "";
             },
             error: function () {

@@ -124,4 +124,8 @@ public class BoardService {
         pageDTO.setStartPage(startPage);
         return pageDTO;
     }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
 }

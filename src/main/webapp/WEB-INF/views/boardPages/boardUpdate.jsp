@@ -21,11 +21,11 @@
 
 <div id="section">
     <table>
-        <form action="/board/" method="post" enctype="multipart/form-data">
-            <input type="text" name="boardTitle" placeholder="제목"> <br>
-            <input type="hidden" name="memberId" value="${sessionScope.loginId}">
-            <input type="text" name="boardWriter" value="${sessionScope.loginEmail}"> <br>
-            <textarea name="boardContents" cols="30" rows="10"></textarea> <br>
+        <form action="/board/update" method="post" enctype="multipart/form-data">
+            <input type="text" name="id" value="${board.id}" readonly> <br>
+            <input type="text" name="boardTitle" value="${board.boardTitle}"> <br>
+            <input type="text" name="boardWriter" value="${sessionScope.loginEmail}" readonly> <br>
+            <textarea name="boardContents" cols="30" rows="10">${board.boardContents}</textarea> <br>
             <input type="file" name="boardFile" multiple> <br>
             <input type="submit" value="작성">
         </form>

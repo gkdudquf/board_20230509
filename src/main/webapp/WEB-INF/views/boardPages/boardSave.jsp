@@ -23,7 +23,6 @@
     <table>
         <form action="/board/" method="post" enctype="multipart/form-data">
             <input type="text" name="boardTitle" placeholder="제목"> <br>
-            <input type="hidden" name="memberId" value="${sessionScope.loginId}">
             <input type="text" name="boardWriter" value="${sessionScope.loginEmail}"> <br>
             <textarea name="boardContents" cols="30" rows="10"></textarea> <br>
             <input type="file" name="boardFile" multiple> <br>
