@@ -10,5 +10,6 @@ public class CommentDTO {
     private String commentWriter;
     private String commentContents;
     private Long boardId;
+    private Long memberId;
     private Timestamp commentCreatedDate;
 }

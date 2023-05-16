@@ -45,6 +45,8 @@ public class MemberService {
     public MemberDTO loginCheck(MemberDTO memberDTO) {
         return memberRepository.loginCheck(memberDTO);
     }
-fds
+
+    public MemberDTO findById(String loginEmail) {
+        return memberRepository.findById(loginEmail);
+    }
 }
-p;l444545;lll=\gfdfssdds
