@@ -134,5 +134,10 @@ public class BoardController {
         return "boardPages/boardDetail";
     }
 
+    @GetMapping("/delete-check")
+    public String delete(@RequestParam("id") Long id) {
+        boardService.delete(id);
+        return "redirect:/board/";
+    }
 
 }
