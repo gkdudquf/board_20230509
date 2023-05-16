@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import java.util.List;
 
 @Controller
@@ -17,6 +18,16 @@ import java.util.List;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+
+    @PostMapping("/save")
+    public ResponseEntity save (@ModelAttribute CommentDTO commentDTO) {
+        System.out.println(commentDTO);
+        commentService.save(commentDTO);
+
+        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getBoardId());
+        System.out.println(commentDTOList);
+        return new ResponseEntity<>(commentDTOList, HttpStatus.OK);
+    }
 
 }
 

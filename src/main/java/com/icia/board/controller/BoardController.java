@@ -94,4 +94,9 @@ public class BoardController {
         return "boardPages/boardDetail";
     }
 
+    @GetMapping("/update")
+    public String updateForm(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("id", id);
+        return "/boardPages/boardUpdate";
+    }
 }
