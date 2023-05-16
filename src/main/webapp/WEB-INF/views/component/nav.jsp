@@ -34,7 +34,8 @@
     const loginEmail = '${sessionScope.loginEmail}';
 
     if (loginEmail.length != 0) {
-        loginArea.innerHTML = "<a href='/member/mypage' style='color: black;'>" + loginEmail + "님 환영해요!</a>" +
+        loginArea.innerHTML =   loginEmail + "님 환영해요!" +
+                                "<a href='/member/mypage' style='color: black;'>mypage </a>" +
                                 "<a href='/member/logout'>logout</a>";
     } else {
         loginArea.innerHTML = "<a href='/member/login'>login</a>";

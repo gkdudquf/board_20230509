@@ -20,7 +20,11 @@
 <%@include file="../component/nav.jsp"%>
 
 <div id="section">
-
+    <table>
+        <form action="/member/update" method="post">
+            <input type="text" name="id" value="">
+        </form>
+    </table>
 
 </div>
 <%@include file="../component/footer.jsp"%>
