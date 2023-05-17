@@ -31,4 +31,8 @@ public class MemberRepository {
     public MemberDTO findById(String boardWriter) {
         return sql.selectOne("Member.findById", boardWriter);
     }
+
+    public void update(MemberDTO memberDTO) {
+        sql.update("Member.update", memberDTO);
+    }
 }

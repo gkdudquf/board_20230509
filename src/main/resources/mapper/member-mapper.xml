@@ -25,4 +25,8 @@
     <select id="findById" parameterType="String" resultType="member">
         select * from member_table where memberEmail=#{memberEmail}
     </select>
+
+    <update id="update" parameterType="member">
+        update member_table set memberMobile=#{memberMobile} where id=#{id}
+    </update>
 </mapper>

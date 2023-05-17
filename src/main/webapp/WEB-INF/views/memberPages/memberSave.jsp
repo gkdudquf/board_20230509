@@ -54,7 +54,7 @@
             },
             error: function () {
                 result.innerHTML = "중복된 이메일입니다";
-                result.color = "red";
+                result.style.color = "red";
             }
         });
 
@@ -80,7 +80,7 @@
             result.innerHTML = "사용가능한 전화번호입니다";
         } else {
             result.innerHTML = "010-0000-0000 형식으로 입력해주세요";
-            result.color = "red";
+            result.style.color = "red";
         }
     }
 

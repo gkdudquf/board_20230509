@@ -49,4 +49,8 @@ public class MemberService {
     public MemberDTO findById(String loginEmail) {
         return memberRepository.findById(loginEmail);
     }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.update(memberDTO);
+    }
 }
