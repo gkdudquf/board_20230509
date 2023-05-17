@@ -85,4 +85,11 @@ public class MemberController {
         model.addAttribute("memberList", memberDTOList);
         return "/memberPages/manager";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        System.out.println("id = " + id);
+        memberService.delete(id);
+        return "redirect:/";
+    }
 }

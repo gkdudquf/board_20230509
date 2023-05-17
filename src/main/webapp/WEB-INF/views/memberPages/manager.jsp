@@ -29,6 +29,7 @@
             <th>memberPassword</th>
             <th>memberName</th>
             <th>memberMobile</th>
+            <th>delete</th>
         </tr>
         <c:forEach items="${memberList}" var="member">
             <tr>
@@ -37,6 +38,9 @@
                 <td>${member.memberPassword}</td>
                 <td>${member.memberName}</td>
                 <td>${member.memberMobile}</td>
+                <td>
+                    <button onclick="member_delete('${member.id}')">삭제</button>
+                </td>
             </tr>
         </c:forEach>
     </table>
@@ -44,7 +48,9 @@
 <%@include file="../component/footer.jsp"%>
 </body>
 <script>
-
+const member_delete = (id) => {
+    location.href = "/member/delete?id=" + id;
+}
 
 </script>
 
