@@ -32,8 +32,11 @@
 <script>
     const loginArea = document.getElementById("login-area");
     const loginEmail = '${sessionScope.loginEmail}';
-
-    if (loginEmail.length != 0) {
+    const manager = "admin";
+    if (loginEmail == manager) {
+        loginArea.innerHTML = "<a href='/member/manager'>관리자페이지</a>"
+    }
+    else if (loginEmail.length != 0) {
         loginArea.innerHTML =   loginEmail + "님 환영해요!" +
                                 "<a href='/member/mypage' style='color: black;'>mypage </a>" +
                                 "<a href='/member/logout'>logout</a>";

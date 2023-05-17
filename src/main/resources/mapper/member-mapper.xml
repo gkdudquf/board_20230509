@@ -29,4 +29,8 @@
     <update id="update" parameterType="member">
         update member_table set memberMobile=#{memberMobile} where id=#{id}
     </update>
+
+    <select id="findAll" resultType="member">
+        select * from member_table
+    </select>
 </mapper>
